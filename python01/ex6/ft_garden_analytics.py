@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 
 class Plant:
-    total_plants = {None: 0}
-    growth = {None: 0}
-
-    def __init__(self, name: str, height: int, garden=None) -> None:
+    def __init__(self, name: str, height: int) -> None:
         self.name = name
         self.height = height
-        self.garden = garden
-        self.__class__.add_plant()
 
     def show(self):
         print(f"{self.name}: {self.height}cm")
@@ -16,48 +11,9 @@ class Plant:
     def grow(self, amount=1):
         self.height += amount
         print(f"{self.name} grew {amount}cm")
-        Plant.register_growth(self.garden, amount)
-
-    @classmethod
-    def add_plant(cls, key=None):
-        if key in cls.total_plants:
-            cls.total_plants[key] +=1
-        else:
-            cls.total_plants[key] = 1
-
-    @classmethod
-    def change_plant(cls, origin, end):
-        cls.total_plants[origin] -= 1
-        if end in cls.total_plants:
-            cls.total_plants[end] += 1
-        else:
-            cls.total_plants[end] = 1
-
-    @classmethod
-    def get_plants(cls, key=None) -> int:
-        if key in cls.total_plants:
-            return cls.total_plants[key]
-        else:
-            return 0
-
-    @classmethod
-    def register_growth(cls, garden, amount):
-        if garden in cls.growth:
-            cls.growth[garden] += amount
-        else:
-            cls.growth[garden] = amount
-
-    @classmethod
-    def total_growth(cls, garden):
-        if garden in cls.growth:
-            return cls.growth[garden]
-        else:
-            return 0
 
 
 class FloweringPlant(Plant):
-    total_plants = {None: 0}
-
     def __init__(self, name: str, height: int, color: str, blooming: bool=True) -> None:
         super().__init__(name, height)
         self.color = color
@@ -75,8 +31,6 @@ class FloweringPlant(Plant):
 
 
 class PrizeFlower(FloweringPlant):
-    total_plants = {None: 0}
-
     def __init__(self, name: str, height: int, color: str, prize: int) -> None:
         super().__init__(name, height, color)
         self.prize = prize
@@ -89,18 +43,29 @@ class PrizeFlower(FloweringPlant):
 
 
 class Garden:
-    def __init__(self, name: str):
+    def __init__(self, name: str, plants=None):
         self.name = name
-        self.plants = []
-        self.total_plants = 0
+        self.plants = plants if plants != None else []
+        self.regular_plants = 0
+        self.flower_plants = 0
+        self.prize_flowers = 0
+        self.total_growth = 0
+        for plant in self.plants:
+            self.select_type(plant)
 
     def add_plants(self, plants: list[Plant]):
         for p in plants:
             self.plants += [p,]
-            p.__class__.change_plant(p.garden, self.name)
-            p.garden = self.name
-            self.total_plants += 1
+            self.select_type(p)
             print(f"Added {p.name} to {self.name}'s garden")
+
+    def select_type(self, plant: Plant):
+        if plant.__class__ == PrizeFlower:
+            self.prize_flowers += 1
+        elif plant.__class__ == FloweringPlant:
+            self.flower_plants += 1
+        else:
+            self.regular_plants += 1
 
     def show_garden(self):
         print(f"=== {self.name}'s Garden Report ===")
@@ -109,13 +74,14 @@ class Garden:
             print("- ", end='')
             plant.show()
         print()
-        print(f"Plants added: {self.total_plants}, Total growth: {Plant.total_growth(self.name)}")
-        print(f"Plant types: {Plant.get_plants(self.name)} regular, {FloweringPlant.get_plants(self.name)} flowering, {PrizeFlower.get_plants(self.name)} prize flowers")
+        print(f"Plants added: {self.regular_plants + self.flower_plants + self.prize_flowers}, Total growth: {self.total_growth}")
+        print(f"Plant types: {self.regular_plants} regular, {self.flower_plants} flowering, {self.prize_flowers} prize flowers")
 
     def grow_plants(self, amount=1):
         print(f"{self.name} is helping all plants grow...")
         for plant in self.plants:
             plant.grow(amount)
+            self.total_growth += amount
 
 
 class GardenManager:
@@ -135,6 +101,13 @@ class GardenManager:
     @classmethod
     def get_total(cls) -> int:
         return cls.total_gardens
+
+    @classmethod
+    def create_garden_network(cls):
+        manager = cls()
+        manager.add_garden(Garden("Alice"))
+        manager.add_garden(Garden("Bob", [PrizeFlower("Tulip", 52, "violet", 10),]))
+        return manager
 
     class GardenStats:
         @staticmethod
@@ -171,20 +144,15 @@ class GardenManager:
             print(f"Total gardens managed: {GardenManager.get_total()}")
 
 
-
 def main():
     print("=== Garden Management System Demo ===")
-    manager = GardenManager()
-    manager.add_garden(Garden("Alice"))
-    manager.add_garden(Garden("Bob"))
+    manager = GardenManager.create_garden_network()
+    manager.add_garden(Garden("Eve"))
+    manager.add_garden(Garden("Martin"))
     manager.gardens["Alice"].add_plants([
         Plant("Oak tree", 100),
         FloweringPlant("Rose", 25, "red"),
         PrizeFlower("Sunflower", 50, "yellow", 10),
-        Plant("Cactus", 12)
-    ])
-    manager.gardens["Bob"].add_plants([
-        PrizeFlower("Tulip", 52, "violet", 10),
     ])
     print()
     manager.gardens["Alice"].grow_plants()
@@ -192,8 +160,6 @@ def main():
     manager.gardens["Alice"].show_garden()
     print()
     GardenManager.GardenStats.show_statistics(manager.gardens)
-
-
 
 
 if __name__ == "__main__":
