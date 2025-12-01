@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 
 def ft_garden_intro(plant: str, height: int, age: str) -> None:
+    """
+    Displays plant information.
+
+    Args:
+        plant (str): The plant's name.
+        height (int): Height of the plant in centimeters.
+        age (str): Age of the plant in days.
+
+    Returns:
+        None
+    """
     print("=== Welcome to My Garden ===")
     print(f"Plant: {plant}")
     print(f"Height: {height}cm")

@@ -1,12 +1,26 @@
 #!/usr/bin/env python3
 
 class Plant:
-    def __init__(self, name: str, height: int, age: int):
+    """
+    Represents a plant with a name, height, and age.
+    """
+    def __init__(self, name: str, height: int, age: int) -> None:
+        """
+        Initialize a new Plant instance.
+
+        Args:
+            name (str): The plant's name.
+            height (int): Height of the plant in centimeters.
+            age (int): Age of the plant in days.
+        """
         self.name = name
         self.height = height
         self.age = age
 
-    def get_info(self):
+    def get_info(self) -> None:
+        """
+        Displays plant information in an organized way
+        """
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 

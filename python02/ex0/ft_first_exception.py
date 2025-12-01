@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 
 def check_temperature(temp_str: str) -> int | None:
+    """
+    Validate and check a temperature string for suitability for plants.
+
+    Args:
+        temp_str (str): Temperature input as a string.
+
+    Returns:
+        Optional[int]: The temperature as an integer if valid
+        and within range (0-40°C), otherwise None.
+    """
     try:
         temp = int(temp_str)
         if temp < 0:
@@ -15,6 +25,12 @@ def check_temperature(temp_str: str) -> int | None:
 
 
 def test_temperature_input():
+    """
+    Demonstrate the check_temperature function with a set of test inputs.
+
+    Tests include valid temperatures, negative values, overly high values,
+    and invalid non-numeric inputs.
+    """
     print("=== Garden Temperature Checker ===\n")
     tests = ["25", "abc", "100", "-50"]
     for temp in tests:
