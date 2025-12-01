@@ -24,14 +24,17 @@ class Plant:
 
     def check_health(self):
         if self.water_amount < 1:
-            raise ValueError(f"Water level {self.water_amount} is too low (min 1)")
+            raise ValueError(f"Water level {self.water_amount} "
+                             "is too low (min 1)")
         if self.water_amount > 10:
-            raise ValueError(f"Water level {self.water_amount} is too high (max 10)")
+            raise ValueError(f"Water level {self.water_amount} "
+                             "is too high (max 10)")
         if self.sun < 2:
             raise ValueError(f"Sunlight hours {self.sun} is too low (min 2)")
         if self.sun > 12:
             raise ValueError(f"Sunlight hours {self.sun} is too high (max 12)")
-        print(f"{self.name}: healthy (water: {self.water_amount}, sun: {self.sun})")
+        print(f"{self.name}: healthy (water: "
+              f"{self.water_amount}, sun: {self.sun})")
 
 
 class GardenManager:
@@ -86,6 +89,7 @@ def main():
     garden.water_plants()
     print("System recovered and continuing...")
     print("\nGarden management system test complete!")
+
 
 if __name__ == "__main__":
     main()

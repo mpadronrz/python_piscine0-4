@@ -14,7 +14,8 @@ class Plant:
 
 
 class FloweringPlant(Plant):
-    def __init__(self, name: str, height: int, color: str, blooming: bool=True) -> None:
+    def __init__(self, name: str, height: int, color: str,
+                 blooming: bool = True) -> None:
         super().__init__(name, height)
         self.color = color
         self.blooming = blooming
@@ -25,7 +26,8 @@ class FloweringPlant(Plant):
 
     def show(self) -> None:
         if self.blooming:
-            print(f"{self.name}: {self.height}cm, {self.color} flowers (blooming)")
+            print(f"{self.name}: {self.height}cm, {self.color} "
+                  "flowers (blooming)")
         else:
             print(f"{self.name}: {self.height}cm, {self.color} flowers")
 
@@ -37,15 +39,17 @@ class PrizeFlower(FloweringPlant):
 
     def show(self) -> None:
         if self.blooming:
-            print(f"{self.name}: {self.height}cm, {self.color} flowers (blooming), Prize points: {self.prize}")
+            print(f"{self.name}: {self.height}cm, {self.color} "
+                  f"flowers (blooming), Prize points: {self.prize}")
         else:
-            print(f"{self.name}: {self.height}cm, {self.color} flowers, Prize points: {self.prize}")
+            print(f"{self.name}: {self.height}cm, {self.color} "
+                  f"flowers, Prize points: {self.prize}")
 
 
 class Garden:
     def __init__(self, name: str, plants=None):
         self.name = name
-        self.plants = plants if plants != None else []
+        self.plants = plants if plants is not None else []
         self.regular_plants = 0
         self.flower_plants = 0
         self.prize_flowers = 0
@@ -74,8 +78,12 @@ class Garden:
             print("- ", end='')
             plant.show()
         print()
-        print(f"Plants added: {self.regular_plants + self.flower_plants + self.prize_flowers}, Total growth: {self.total_growth}")
-        print(f"Plant types: {self.regular_plants} regular, {self.flower_plants} flowering, {self.prize_flowers} prize flowers")
+        print(f"Plants added: {self.regular_plants +
+                               self.flower_plants + self.prize_flowers}"
+              f", Total growth: {self.total_growth}")
+        print(f"Plant types: {self.regular_plants} regular, "
+              f"{self.flower_plants} flowering, "
+              f"{self.prize_flowers} prize flowers")
 
     def grow_plants(self, amount=1):
         print(f"{self.name} is helping all plants grow...")
@@ -106,7 +114,8 @@ class GardenManager:
     def create_garden_network(cls):
         manager = cls()
         manager.add_garden(Garden("Alice"))
-        manager.add_garden(Garden("Bob", [PrizeFlower("Tulip", 52, "violet", 10),]))
+        manager.add_garden(Garden("Bob", [PrizeFlower("Tulip",
+                                                      52, "violet", 10),]))
         return manager
 
     class GardenStats:
@@ -147,8 +156,6 @@ class GardenManager:
 def main():
     print("=== Garden Management System Demo ===")
     manager = GardenManager.create_garden_network()
-    manager.add_garden(Garden("Eve"))
-    manager.add_garden(Garden("Martin"))
     manager.gardens["Alice"].add_plants([
         Plant("Oak tree", 100),
         FloweringPlant("Rose", 25, "red"),
