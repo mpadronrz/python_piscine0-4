@@ -179,4 +179,4 @@ def test_garden_management() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    test_garden_management()
