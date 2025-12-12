@@ -54,7 +54,7 @@ class Plant:
         self.water_amount += 1
         print(f"Watering {self.name} - success")
 
-    def check_health(self) -> None:
+    def check_plant_health(self) -> None:
         """
         Check the plant's health based on water and sunlight.
 
@@ -156,7 +156,7 @@ class GardenManager:
         self.water += amount
 
 
-def main() -> None:
+def test_garden_management() -> None:
     """
     Demonstrate the GardenManager system.
 
