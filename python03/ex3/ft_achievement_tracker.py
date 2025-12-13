@@ -1,25 +1,113 @@
 #! /usr/bin/env python3
 
+def get_data():
+    data = {
+        "alice": [
+            "first_blood",
+            "pixel_perfect",
+            "speed_runner",
+            "first_blood",
+            "first_blood",
+        ],
+        "bob": [
+            "level_master",
+            "boss_hunter",
+            "treasure_seeker",
+            "level_master",
+            "level_master",
+        ],
+        "charlie": [
+            "treasure_seeker",
+            "boss_hunter",
+            "combo_king",
+            "first_blood",
+            "boss_hunter",
+            "first_blood",
+            "boss_hunter",
+            "first_blood",
+        ],
+        "diana": [
+            "first_blood",
+            "combo_king",
+            "level_master",
+            "treasure_seeker",
+            "speed_runner",
+            "combo_king",
+            "combo_king",
+            "level_master",
+        ],
+        "eve": [
+            "level_master",
+            "treasure_seeker",
+            "first_blood",
+            "treasure_seeker",
+            "first_blood",
+            "treasure_seeker",
+        ],
+        "frank": [
+            "explorer",
+            "boss_hunter",
+            "first_blood",
+            "explorer",
+            "first_blood",
+            "boss_hunter",
+        ],
+    }
+    return data
+
+
+def all_achivements(players: list[set]):
+    all = set()
+    for player in players:
+        all = all.union(player)
+    return all
+
+
+def common_achivements(players: list[set]):
+    if len(players) == 0:
+        return set()
+    common = players[0]
+    for i in range(1, len(players)):
+        common = common.intersection(players[i])
+    return common
+
+
+def rare_achivements(players: list[set]):
+    rare = set()
+    for i in range(len(players)):
+        aux = players[i]
+        for j in range(len(players)):
+            if i == j:
+                continue
+            aux = aux.difference(players[j])
+        rare = rare.union(aux)
+    return rare
+
+
 def main() -> None:
     print("=== Achievement Tracker System ===\n")
-    alice = {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon'}
-    bob = {'first_kill', 'level_10', 'boss_slayer', 'collector'}
-    charlie = {'level_10', 'treasure_hunter', 'boss_slayer',
-               'speed_demon', 'perfectionist'}
+    data = get_data()
+    alice = set(data["alice"])
+    bob = set(data["bob"])
+    charlie = set(data["charlie"])
+
     print(f"Player alice achievements: {alice}")
     print(f"Player bob achievements: {bob}")
     print(f"Player charlie achievements: {charlie}")
+
     print("\n=== Achievement Analytics ===")
-    all = alice.union(bob, charlie)
+    all = all_achivements([alice, bob, charlie])
     print(f"All unique achievements: {all}")
     print(f"Total unique achievements: {len(all)}")
-    print(f"Common to all players: {alice.intersection(bob, charlie)}")
-    print("Rare achievements (1 player):"
-          f"{alice.difference(bob, charlie).union(
-              bob.difference(alice, charlie),
-              charlie.difference(alice, bob)
-            )}")
-    print(f"Alice vs Bob common: {alice.intersection(bob)}")
+
+    common = common_achivements([alice, bob, charlie])
+    print(f"Common to all players: {common}")
+
+    rare = rare_achivements([alice, bob, charlie])
+    print(f"Rare achievements (1 player): {rare}")
+
+    common_ab = common_achivements([alice, bob])
+    print(f"Alice vs Bob common: {common_ab}")
     print(f"Alice unique: {alice.difference(bob)}")
     print(f"Bob unique: {bob.difference(alice)}")
 
