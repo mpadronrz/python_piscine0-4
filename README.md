@@ -143,4 +143,4 @@ Together, they form a solid base for advanced Python projects and further Common
 
 ---
 
-🧑‍💻 *42 Student · Python Piscine · New Common Core*
+🧑‍💻 *42 Student mapadron · Python Piscine · New Common Core*
