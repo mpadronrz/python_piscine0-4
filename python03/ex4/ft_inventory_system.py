@@ -2,6 +2,9 @@
 
 
 def inventory_generator() -> dict:
+    """
+    Generates the videogame inventory, with players and a catalog of all items
+    """
     inventory = {
         "players": {
             "alice": {
@@ -73,6 +76,9 @@ def inventory_generator() -> dict:
 
 
 def print_inventory(inventory: dict, player: str) -> None:
+    """
+    Displays a player's inventory with useful data
+    """
     print(f"=== {player}'s Inventory ===")
 
     player_inventory = inventory["players"].get(player)
@@ -101,6 +107,11 @@ def print_inventory(inventory: dict, player: str) -> None:
 
 def transaction(inventory: dict, player1: str,
                 player2: str, item: str, amount: int) -> None:
+    """
+    Takes amount elements of item from player1's inventory and gives
+    them to player2.
+    Updates the gold value and item_count of both players
+    """
     print(f"=== Transaction: {player1} gives {player2} {amount} {item} ===")
 
     if (player1 == player2):
@@ -156,7 +167,13 @@ def transaction(inventory: dict, player1: str,
     print(f"{player2} {category}: {p2_cat_amount}")
 
 
-def inventory_analitics(inventory):
+def inventory_analitics(inventory: dict) -> None:
+    """
+    Calculates inventory analitics:
+        - Most valuable player
+        - Player with the most items
+        - Rarest items
+    """
     players = inventory["players"]
     catalog = inventory["catalog"]
 
@@ -196,6 +213,10 @@ def inventory_analitics(inventory):
 
 
 def main() -> None:
+    """
+    Tests the above functions, using the inventory generates by
+    inventory_generator
+    """
     print("=== Player Inventory System ===")
     print()
     inventory = inventory_generator()

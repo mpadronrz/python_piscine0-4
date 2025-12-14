@@ -3,7 +3,10 @@
 import sys
 
 
-def main():
+def main() -> None:
+    """
+    main function to test how sys.argv works
+    """
     print("=== Command Quest ===")
     argc = len(sys.argv)
     if argc == 1:

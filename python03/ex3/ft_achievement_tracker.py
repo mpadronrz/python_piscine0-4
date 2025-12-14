@@ -1,6 +1,9 @@
 #! /usr/bin/env python3
 
-def get_data():
+def get_data() -> None:
+    """
+    Returns data dict to use in later functions
+    """
     data = {
         "alice": [
             "first_blood",
@@ -56,14 +59,24 @@ def get_data():
     return data
 
 
-def all_achivements(players: list[set]):
+def all_achivements(players: list[set]) -> set:
+    """
+    Takes a list of achievments (sets) and returns the achievments
+    held by any player
+    (union of sets)
+    """
     all = set()
     for player in players:
         all = all.union(player)
     return all
 
 
-def common_achivements(players: list[set]):
+def common_achivements(players: list[set]) -> set:
+    """
+    Takes a list of achievments (sets) and returns the achievments held
+    by all players
+    (intersection of sets)
+    """
     if len(players) == 0:
         return set()
     common = players[0]
@@ -72,7 +85,12 @@ def common_achivements(players: list[set]):
     return common
 
 
-def rare_achivements(players: list[set]):
+def rare_achivements(players: list[set]) -> set:
+    """
+    Takes a list of achievments (sets) and returns the achievments held
+    by only one player
+    (difference and union of sets)
+    """
     rare = set()
     for i in range(len(players)):
         aux = players[i]
@@ -85,6 +103,11 @@ def rare_achivements(players: list[set]):
 
 
 def main() -> None:
+    """
+    main function to test all the above ones
+    takes data from get_data and uses the rest of functions to analize
+    the achievments
+    """
     print("=== Achievement Tracker System ===\n")
     data = get_data()
     alice = set(data["alice"])

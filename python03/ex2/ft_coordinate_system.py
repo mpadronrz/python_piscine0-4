@@ -3,7 +3,10 @@
 import math
 
 
-def distance(coordinates: tuple[str]):
+def distance(coordinates: tuple[str]) -> int:
+    """
+    Calculates the euclidean distance of a point to the origin
+    """
     dist = 0
     for i in coordinates:
         dist += i ** 2
@@ -13,6 +16,11 @@ def distance(coordinates: tuple[str]):
 
 
 def parse_coordinates(data: str) -> tuple[int] | None:
+    """
+    Takes a string of 3 numbers separated by "," and converts
+    it into a 3D point. Calculates the distance to the origin
+    and returns the point
+    """
     elems = data.split(",")
     i = 0
     for num in elems:
@@ -32,7 +40,11 @@ def parse_coordinates(data: str) -> tuple[int] | None:
     return coordinates
 
 
-def create_position(coordinates: tuple[int]) -> tuple[int] | None:
+def create_position(coordinates: tuple[int]) -> None:
+    """
+    Takes a tuple of 3 ints, prints it and calculates
+    the distance to the origin
+    """
     i = 0
     for num in coordinates:
         i += 1
@@ -44,6 +56,9 @@ def create_position(coordinates: tuple[int]) -> tuple[int] | None:
 
 
 def unpack_coordinates(coordinates: tuple[int]) -> None:
+    """
+    Unpacks the coordinates to display them on the screen
+    """
     print(f"Player at x={coordinates[0]}, "
           f"y={coordinates[1]}, z={coordinates[2]}")
     x, y, z, = coordinates
@@ -51,6 +66,9 @@ def unpack_coordinates(coordinates: tuple[int]) -> None:
 
 
 def main() -> None:
+    """
+    main function to test all the coordinate-related functions
+    """
     print("=== Game Coordinate System ===\n")
     create_position((10, 20, 5))
 

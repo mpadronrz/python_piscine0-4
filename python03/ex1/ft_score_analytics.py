@@ -3,7 +3,10 @@
 import sys
 
 
-def main():
+def main() -> None:
+    """
+    main function to test how sys.argv works
+    """
     print("=== Player Score Analytics ===")
     argc = len(sys.argv)
     if argc == 1:
