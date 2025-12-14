@@ -117,6 +117,7 @@ def transaction(inventory: dict, player1: str,
     if (player1 == player2):
         print("Error: Player 1 and Player 2 must be different players.")
         print("Transaction unsuccessful!")
+        return
 
     if amount <= 0:
         print(f"Error: {player1} cannot give a non-positive "
