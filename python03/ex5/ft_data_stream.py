@@ -23,7 +23,7 @@ def fibonacci_generator():
         yield second
 
 
-def generate_numbers(size: int, method: str):
+def generate_numbers(size: int, method: str) -> None:
     if method == "prime":
         generator = prime_generator()
         print(f"Prime numbers (first {size}): ", end="")
@@ -37,7 +37,7 @@ def generate_numbers(size: int, method: str):
     print(f"{next(generator)}")
 
 
-def game_events_generator(players, events):
+def game_events_generator(players: list[str], events: list[str]):
     i = 1
     while True:
         level = ((17 * i + 37) % ((11 * i + 5) % 19 + 2))
@@ -59,7 +59,7 @@ def game_events_generator(players, events):
         i += 1
 
 
-def game_events(size, players, events):
+def game_events(size: int, players: list[str], events: list[str]) -> None:
     print("=== Game Data Stream Processor ===\n")
     print(f"Processing {size} game events...")
     high_level = 0
@@ -68,8 +68,8 @@ def game_events(size, players, events):
     generator = game_events_generator(players, events)
     for i in range(size):
         data = next(generator)
-        print(f"Event {data["id"]}: Player {data["player"]} "
-              f"(level {data["level"]}) {data["event"]}")
+        print(f"Event {data['id']}: Player {data['player']} "
+              f"(level {data['level']}) {data['event']}")
         if data["level"] >= 10:
             high_level += 1
         if data["event"] == "found tresure":
@@ -83,7 +83,7 @@ def game_events(size, players, events):
     print(f"Level-up events: {level_up}")
 
 
-def main():
+def main() -> None:
     players = ['alice', 'bob', 'charlie', 'diana', 'eve', 'frank']
     events = [
         'loged in',

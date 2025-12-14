@@ -92,12 +92,12 @@ def print_inventory(inventory: dict, player: str) -> None:
         value = catalog[item]["value"]
         tp = catalog[item]["type"]
         category[tp] = category.get(tp, 0) + amount
-        print(f"{item} ({catalog[item]["rarity"]}, {tp}): "
+        print(f"{item} ({catalog[item]['rarity']}, {tp}): "
               f"{amount}x @ {value} each = {amount * value} gold")
 
     print()
-    print(f"Inventory value: {player_inventory["total_value"]}")
-    print(f"Item count: {player_inventory["item_count"]}")
+    print(f"Inventory value: {player_inventory['total_value']}")
+    print(f"Item count: {player_inventory['item_count']}")
 
     category_print = "Category: "
     for elem in category:

@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 
-def get_data():
+def get_data() -> dict:
     data = {
         "players": {
             "alice": {
@@ -274,7 +274,7 @@ def get_data():
     return data
 
 
-def test_list_comprehensions(data):
+def test_list_comprehensions(data: dict) -> None:
     print("=== List Comprehension Examples ===")
     players = data["players"]
 
@@ -289,7 +289,7 @@ def test_list_comprehensions(data):
     print(f"Active players: {active_players}")
 
 
-def test_dict_comprehensions(data):
+def test_dict_comprehensions(data: dict) -> None:
     print("=== Dict Comprehension Examples ===")
     players = data["players"]
     score_levels = [
@@ -317,7 +317,7 @@ def test_dict_comprehensions(data):
     print(f"Achievement counts: {achievement_count}")
 
 
-def test_set_comprehensions(data):
+def test_set_comprehensions(data: dict) -> None:
     print("=== Set Comprehension Examples ===")
     players = data["players"]
 
@@ -331,7 +331,8 @@ def test_set_comprehensions(data):
     print(f"Diferent gamemodes: {unique_gamemodes}")
 
 
-def combined_analysis(data):
+def combined_analysis(data: dict) -> None:
+    print("=== Combined Analysis ===")
     players = data["players"]
 
     total_players = len(players)
@@ -352,8 +353,8 @@ def combined_analysis(data):
 
     top_performer = sorted(players, key=player_score)[-1]
     print(f"Top performer: {top_performer} "
-          f"({players[top_performer]["total_score"]} points, "
-          f"{players[top_performer]["achievements_count"]} achievements)")
+          f"({players[top_performer]['total_score']} points, "
+          f"{players[top_performer]['achievements_count']} achievements)")
 
 
 def main() -> None:
