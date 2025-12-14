@@ -4,6 +4,12 @@ import sys
 
 
 def main() -> None:
+    """
+    main function to test:
+        - reading from stdin: input()
+        - writing to stdout: sys.stdout
+        - writing to stderr: sys.stderr
+    """
     print("=== CYBER ARCHIVES - COMMUNICATION SYSTEM ===\n")
     user_id = input("Input Stream active. Enter archivist ID: ")
     status = input("Input Stream active. Enter status report: ")

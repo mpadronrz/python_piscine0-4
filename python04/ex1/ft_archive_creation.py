@@ -1,6 +1,12 @@
 #! /usr/bin/env python3
 
 def main() -> None:
+    """
+    main function to test open and writing in a file
+    If file exists, rewrites it
+    If not, creates the file
+    Handels PermissionError apropiately
+    """
     print("=== CYBER ARCHIVES - RESERVATION SYSTEM ===\n")
     filename = "new_discovery.txt"
     print(f"Initializing new storage unit: {filename}")

@@ -2,6 +2,10 @@
 
 
 def main() -> None:
+    """
+    main function to test opening a file with the 'with' statement
+    ensures the file is closed even when a an error ocurres
+    """
     print("=== CYBER ARCHIVES - VAULT SECURITY SYSTEM ===\n")
     print("Initiating secure vault access...")
     read_fn = "classified_data.txt"
